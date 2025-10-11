@@ -744,7 +744,7 @@ elif page == "🔬 Model Laboratory":
         
         st.markdown(f"""
         <div class="insight-card">
-            <h3>🏆 Champion Model</h3>
+            <h3>Champion Model</h3>
             <h2>{best_model_name}</h2>
             <p><strong>Test Accuracy:</strong> {best_accuracy:.2f}%</p>
             <p><strong>F1 Score:</strong> {results_df.loc[best_model_name, 'F1 Score']:.2f}%</p>
@@ -856,7 +856,7 @@ elif page == "🔬 Model Laboratory":
                 st.plotly_chart(fig_importance, use_container_width=True)
                 
                 # Show top features
-                st.subheader("🏆 Most Important Features")
+                st.subheader("Most Important Features")
                 top_features = importance_df.tail(10)
                 for _, row in top_features.iterrows():
                     st.markdown(f"""
@@ -994,6 +994,24 @@ elif page == "🎯 Risk Assessment":
                 'Current Education Level': education,
                 **user_responses
             }
+                # Check if any dimension has a score >= 3
+            high_risk_dims = [dim.replace('_', ' ') for dim, score in user_responses.items() if score >= 3]
+
+            if high_risk_dims:
+                alert_message = "⚠️ High Concern Alert!\n\nThe following dimensions scored high (3 or 4):\n"
+                for dim in high_risk_dims:
+                    alert_message += f" - {dim}\n"
+                alert_message += "\nPlease seek immediate consultation with a qualified mental health professional."
+                
+                st.components.v1.html(
+                    f"""
+                    <script>
+                    alert(`{alert_message}`);
+                    </script>
+                    """,
+                    height=0,
+                )
+
             
             input_df = pd.DataFrame([user_input])
             
@@ -1046,7 +1064,7 @@ elif page == "🎯 Risk Assessment":
                 
                 st.markdown(f"""
                 <div class="{css_class}" style="{border_style}">
-                    <h3>{'🏆 ' if is_predicted else ''}{level}</h3>
+                    <h3>{'' if is_predicted else ''}{level}</h3>
                     <h1>{prob*100:.1f}%</h1>
                     {'<p><strong>PREDICTED LEVEL</strong></p>' if is_predicted else ''}
                 </div>
@@ -1255,7 +1273,7 @@ elif page == "🎯 Risk Assessment":
                     st.markdown(f"**{key}:** {value}")
             
             with col2:
-                st.markdown("### 🏆 Highest Scoring Dimensions")
+                st.markdown("### Highest Scoring Dimensions")
                 top_dimensions = sorted([(dim.replace('_', ' '), user_input[dim]) 
                                        for dim in DIMENSIONS], 
                                       key=lambda x: x[1], reverse=True)[:5]
