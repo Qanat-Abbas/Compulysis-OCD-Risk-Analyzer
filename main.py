@@ -6,12 +6,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import joblib
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-from sklearn.svm import SVC
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.base import clone
 from sklearn.metrics import (accuracy_score, classification_report, confusion_matrix, 
                            roc_auc_score, precision_recall_curve, roc_curve, f1_score)
@@ -22,8 +16,6 @@ from sklearn.inspection import permutation_importance
 import datetime
 from sklearn.pipeline import Pipeline
 import json
-import numpy as np
-import pandas as pd
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split, StratifiedKFold, LeaveOneOut, cross_validate
 from sklearn.linear_model import LogisticRegression
@@ -33,8 +25,6 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
-import warnings
-warnings.filterwarnings('ignore')
 import warnings
 warnings.filterwarnings('ignore')
 
